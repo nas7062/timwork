@@ -21,7 +21,7 @@ export interface DisciplineMeta {
 
 /** 이미지 정렬 변환 */
 export interface ImageTransform {
-  relativeTo: string;
+  relativeTo?: string;
   x: number;
   y: number;
   scale: number;
@@ -89,4 +89,26 @@ export interface Metadata {
   project: ProjectMeta;
   disciplines: DisciplineMeta[];
   drawings: Record<string, Drawing>;
+}
+
+/*nomarlize */
+
+export type SpaceKey = string;
+export type DisciplineKey = string;
+export type RegionKey = string;
+
+export interface RevRef {
+  space: SpaceKey;
+  discipline: DisciplineKey;
+  region?: RegionKey;
+  revision: Revision;
+  baseImage: string;
+}
+
+export interface Index {
+  spaces: SpaceKey[];
+  disciplinesBySpace: Record<SpaceKey, DisciplineKey[]>;
+  regionsBySD: Record<string, RegionKey[]>;
+  revisionsBySDR: Record<string, RevRef[]>;
+  baseBySpace: Record<SpaceKey, string>;
 }
