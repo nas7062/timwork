@@ -39,15 +39,9 @@ export default function ViewerPage() {
   if (!ready) return <div style={{ padding: 16 }}>No data</div>;
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "320px 1fr 360px",
-        height: "100vh",
-      }}
-    >
+    <div className="grid h-screen grid-cols-[280px_1fr_300px] bg-[#F3F4F6]">
       <Sidebar />
-      <div style={{ display: "grid", gridTemplateRows: "56px 1fr" }}>
+      <div className="grid grid-rows-[50px_1fr]">
         <Topbar />
         <Viewer />
       </div>

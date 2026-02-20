@@ -57,8 +57,18 @@ export default function Viewer() {
     };
   }, [overlay, overlayOpacity, canOverlay]);
 
-  if (!revision) return <div style={{ padding: 16 }}>도면을 선택하세요.</div>;
-  if (!baseSize) return <div style={{ padding: 16 }}>이미지 로딩 중…</div>;
+  if (!revision)
+    return (
+      <div className="flex justify-center items-center text-gray-700 text-xl ">
+        공간, 공종, 리비전을 선택해 도면을 선택해주세요.
+      </div>
+    );
+  if (!baseSize)
+    return (
+      <div className="flex justify-center items-center text-gray-700 text-xl ">
+        이미지 로딩 중…
+      </div>
+    );
 
   return (
     <div

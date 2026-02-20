@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useViewerStore } from "../store/viewerStore";
-
+import clsx from "clsx";
 export default function Sidebar() {
   const index = useViewerStore((s) => s.index);
   const space = useViewerStore((s) => s.space);
@@ -24,45 +24,34 @@ export default function Sidebar() {
   }, [index, space, discipline]);
 
   return (
-    <div
-      style={{
-        borderRight: "1px solid #e5e7eb",
-        padding: 12,
-        overflow: "auto",
-      }}
-    >
-      <div style={{ fontWeight: 700, marginBottom: 8 }}>공간</div>
-      <div style={{ display: "grid", gap: 6 }}>
+    <div className="flex flex-col gap-3 bg-[#E5E7EB] border border-gray-200 p-3 overflow-auto">
+      <h1 className="text-4xl font-bold">TIMWORK</h1>
+      <h3 className="font-semibold">공간</h3>
+      <div className="flex flex-col gap-1">
         {spaces.map((s) => (
           <button
             key={s}
             onClick={() => setSpace(s)}
-            style={{
-              textAlign: "left",
-              padding: 8,
-              border: "1px solid #e5e7eb",
-              background: s === space ? "#f3f4f6" : "white",
-            }}
+            className={clsx(
+              "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer ",
+              s === space ? "bg-[#2563EB]  text-white" : "bg-white"
+            )}
           >
             {s}
           </button>
         ))}
       </div>
 
-      <div style={{ height: 16 }} />
-
-      <div style={{ fontWeight: 700, marginBottom: 8 }}>공종</div>
-      <div style={{ display: "grid", gap: 6 }}>
+      <h3 className="font-semibold">공종</h3>
+      <div className="flex flex-col gap-1">
         {disciplines.map((d) => (
           <button
             key={d}
             onClick={() => setDiscipline(d)}
-            style={{
-              textAlign: "left",
-              padding: 8,
-              border: "1px solid #e5e7eb",
-              background: d === discipline ? "#f3f4f6" : "white",
-            }}
+            className={clsx(
+              "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer",
+              d === discipline ? "bg-[#2563EB]  text-white" : "bg-white"
+            )}
           >
             {d}
           </button>
@@ -71,19 +60,16 @@ export default function Sidebar() {
 
       {regions.length > 0 && (
         <>
-          <div style={{ height: 16 }} />
-          <div style={{ fontWeight: 700, marginBottom: 8 }}>영역(Region)</div>
-          <div style={{ display: "grid", gap: 6 }}>
+          <div className="font-semibold">영역</div>
+          <div className="flex flex-col gap-1">
             {regions.map((r) => (
               <button
                 key={r}
                 onClick={() => setRegion(r)}
-                style={{
-                  textAlign: "left",
-                  padding: 8,
-                  border: "1px solid #e5e7eb",
-                  background: r === region ? "#f3f4f6" : "white",
-                }}
+                className={clsx(
+                  "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer",
+                  r === region ? "bg-[#2563EB] text-white" : "bg-white"
+                )}
               >
                 {r}
               </button>

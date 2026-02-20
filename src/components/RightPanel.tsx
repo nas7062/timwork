@@ -80,10 +80,16 @@ export default function RightPanel() {
         })}
       </div>
 
-      <div style={{ height: 16 }} />
+      <div className="h-4" />
       <div style={{ fontWeight: 700, marginBottom: 8 }}>Overlay 투명도</div>
+      <div className="flex justify-between text-xs text-gray-500">
+        <p>투명</p>
+        <p>불투명</p>
+      </div>
+
       <input
         type="range"
+        className="w-full"
         min={0}
         max={100}
         defaultValue={60}
