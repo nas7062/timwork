@@ -18,15 +18,8 @@ export default function Topbar() {
     .join(" > ");
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        padding: "0 12px",
-        borderBottom: "1px solid #e5e7eb",
-      }}
-    >
-      <div style={{ fontWeight: 600 }}>{path}</div>
+    <div className="flex items-center py-3  px-2 shadow rounded-md border-b border-b-gray-300">
+      <div className="font-semibold ">{path}</div>
       <div className="ml-auto text-sm font-semibold text-[#2563EB]">
         <p> Base: {revision?.revision.image.split(".")[0] ?? "-"}</p>
         <p>

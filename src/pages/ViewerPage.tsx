@@ -14,6 +14,7 @@ export default function ViewerPage() {
   const [err, setErr] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // metadata.json 호출
   useEffect(() => {
     (async () => {
       try {

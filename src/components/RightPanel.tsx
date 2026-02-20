@@ -20,6 +20,7 @@ export default function RightPanel() {
     );
   }, [index, space, discipline, region]);
 
+  // overlay 구분
   const isSameOverlay = (r: (typeof revs)[number]) => {
     if (!overlay) return false;
     return (
@@ -30,6 +31,7 @@ export default function RightPanel() {
     );
   };
 
+  // base 구분
   const isSelectedBase = (r: (typeof revs)[number]) => {
     if (!revision) return false;
 
@@ -44,7 +46,7 @@ export default function RightPanel() {
   return (
     <div className="border-l border-l-gray-200 p-3 overflow-auto h-screen flex flex-col gap-2">
       <div className="font-semibold">리비전</div>
-      <div style={{ display: "grid", gap: 8 }}>
+      <div className="flex flex-col gap-2">
         {revs.map((r) => {
           const selected = isSameOverlay(r);
           const selectedBase = isSelectedBase(r);
@@ -56,7 +58,7 @@ export default function RightPanel() {
               key={`${r.space}__${r.discipline}__${r.region ?? ""}__${
                 r.revision.version
               }`}
-              className="border border-gray-200 p-2 bg-white rounded-lg"
+              className="border border-gray-200 p-2 bg-white rounded-lg flex flex-col gap-1"
             >
               <div className="font-semibold flex justify-between ">
                 <p>개정 버전 : {r.revision.version}</p>
@@ -66,16 +68,16 @@ export default function RightPanel() {
                   {selectedBase ? "base" : selected ? "overlay" : ""}
                 </p>
               </div>
-              <div style={{ fontSize: 12, color: "#6b7280" }}>
+              <div className="text-xs text-gray-500">
                 개정 날짜 : {r.revision.date}
               </div>
-              <div style={{ fontSize: 12, marginTop: 6 }}>
+              <div className="text-xs text-gray-700">
                 개정 설명 : {r.revision.description}
               </div>
 
               <div className="flex justify-around mt-4 gap-2">
                 <button
-                  className="flex-1 bg-red-400 text-white rounded-md px-2 py-1 cursor-pointer hover:bg-red-500 transition-colors duration-200"
+                  className="flex-1 bg-red-400 text-white rounded-md px-2 py-1.5 cursor-pointer hover:bg-red-500 transition-colors duration-200"
                   onClick={() => {
                     setRevision(r);
 
@@ -86,7 +88,6 @@ export default function RightPanel() {
                       setOverlay(null);
                     }
                   }}
-                  style={{ padding: "6px 8px" }}
                 >
                   {selectedBase ? "현재 base" : "base로 보기"}
                 </button>
@@ -94,7 +95,7 @@ export default function RightPanel() {
                 <button
                   disabled={isSameAsBase(r)}
                   className={clsx(
-                    "flex-1 rounded-md px-2 py-1 transition-colors duration-200",
+                    "flex-1 rounded-md px-2 py-1.5 transition-colors duration-200",
                     isSameAsBase(r)
                       ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                       : "bg-[#2563EB] text-white hover:bg-blue-700 cursor-pointer"
