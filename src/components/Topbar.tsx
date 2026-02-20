@@ -27,11 +27,11 @@ export default function Topbar() {
       }}
     >
       <div style={{ fontWeight: 600 }}>{path}</div>
-      <div className="ml-auto text-sm text-[#2563EB]">
-        <p> Base: {revision?.revision.image ?? "-"}</p>
+      <div className="ml-auto text-sm font-semibold text-[#2563EB]">
+        <p> Base: {revision?.revision.image.split(".")[0] ?? "-"}</p>
         <p>
           Overlay:
-          {overlay?.revision.image ?? "-"}
+          {overlay?.revision.image.split(".")[0] ?? "-"}
         </p>
       </div>
       <div></div>

@@ -24,7 +24,7 @@ export default function Sidebar() {
   }, [index, space, discipline]);
 
   return (
-    <div className="flex flex-col gap-3 bg-[#E5E7EB] border border-gray-200 p-3 overflow-auto">
+    <div className="flex flex-col gap-3 bg-[#eff0f0] border border-gray-200 p-3 overflow-auto">
       <h1 className="text-4xl font-bold">TIMWORK</h1>
       <h3 className="font-semibold">공간</h3>
       <div className="flex flex-col gap-1">
@@ -33,8 +33,8 @@ export default function Sidebar() {
             key={s}
             onClick={() => setSpace(s)}
             className={clsx(
-              "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer ",
-              s === space ? "bg-[#2563EB]  text-white" : "bg-white"
+              "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer hover:border-blue-500 ",
+              s === space ? "bg-[#5d8bee]  text-white" : "bg-white"
             )}
           >
             {s}
@@ -49,8 +49,8 @@ export default function Sidebar() {
             key={d}
             onClick={() => setDiscipline(d)}
             className={clsx(
-              "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer",
-              d === discipline ? "bg-[#2563EB]  text-white" : "bg-white"
+              "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer  hover:border-blue-500",
+              d === discipline ? "bg-[#5d8bee]  text-white" : "bg-white"
             )}
           >
             {d}
@@ -67,8 +67,8 @@ export default function Sidebar() {
                 key={r}
                 onClick={() => setRegion(r)}
                 className={clsx(
-                  "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer",
-                  r === region ? "bg-[#2563EB] text-white" : "bg-white"
+                  "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer  hover:border-blue-500",
+                  r === region ? "bg-[#5d8bee] text-white" : "bg-white"
                 )}
               >
                 {r}

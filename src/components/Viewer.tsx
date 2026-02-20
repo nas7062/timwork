@@ -59,26 +59,19 @@ export default function Viewer() {
 
   if (!revision)
     return (
-      <div className="flex justify-center items-center text-gray-700 text-xl ">
-        공간, 공종, 리비전을 선택해 도면을 선택해주세요.
+      <div className="flex justify-center items-center text-gray-700 text-lg ">
+        공간, 공종, 리비전, 영역을 선택해 도면을 선택해주세요.
       </div>
     );
   if (!baseSize)
     return (
-      <div className="flex justify-center items-center text-gray-700 text-xl ">
+      <div className="flex justify-center items-center text-gray-700 text-lg ">
         이미지 로딩 중…
       </div>
     );
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        overflow: "auto",
-        background: "#0b1220",
-      }}
-    >
+    <div className="w-full h-screen overflow-auto bg-[#FFFFFF] shadow-2xl rounded-2xl">
       {/* stage: 원본 픽셀 좌표계 */}
       <div
         style={{
