@@ -45,7 +45,22 @@ export default function RightPanel() {
 
   return (
     <div className="border-l border-l-gray-200 p-3 overflow-auto h-screen flex flex-col gap-2">
-      <div className="font-semibold">리비전</div>
+      <div className="font-semibold flex gap-2 items-center">
+        <h3>리비전</h3>
+
+        <div className="relative group">
+          <p className="border-2 border-red-500 w-5 h-5 flex items-center justify-center rounded-full text-xs text-red-500 cursor-pointer">
+            i
+          </p>
+
+          <div className="absolute -left-16 top-7 w-70 bg-gray-900 text-white text-xs rounded-md px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
+            • Base는 기준 도면입니다.
+            <br />
+            • Overlay는 선택한 도면을 겹쳐 비교합니다.
+            <br />• Base와 동일한 리비전은 Overlay로 선택할 수 없습니다.
+          </div>
+        </div>
+      </div>
       <div className="flex flex-col gap-2">
         {revs.map((r) => {
           const selected = isSameOverlay(r);
