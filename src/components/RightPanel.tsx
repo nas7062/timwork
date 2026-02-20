@@ -6,7 +6,7 @@ export default function RightPanel() {
   const space = useViewerStore((s) => s.space);
   const discipline = useViewerStore((s) => s.discipline);
   const region = useViewerStore((s) => s.region);
-
+  const overlay = useViewerStore((s) => s.overlay);
   const setRevision = useViewerStore((s) => s.setRevision);
   const setOverlay = useViewerStore((s) => s.setOverlay);
   const setOverlayOpacity = useViewerStore((s) => s.setOverlayOpacity);
@@ -18,44 +18,66 @@ export default function RightPanel() {
     );
   }, [index, space, discipline, region]);
 
+  const isSameOverlay = (r: (typeof revs)[number]) => {
+    if (!overlay) return false;
+    return (
+      overlay.space === r.space &&
+      overlay.discipline === r.discipline &&
+      (overlay.region ?? "") === (r.region ?? "") &&
+      overlay.revision.version === r.revision.version
+    );
+  };
   return (
     <div
       style={{ borderLeft: "1px solid #e5e7eb", padding: 12, overflow: "auto" }}
     >
       <div style={{ fontWeight: 700, marginBottom: 8 }}>리비전</div>
       <div style={{ display: "grid", gap: 8 }}>
-        {revs.map((r) => (
-          <div
-            key={r.revision.version}
-            style={{
-              border: "1px solid #e5e7eb",
-              padding: 8,
-              background: "white",
-            }}
-          >
-            <div style={{ fontWeight: 600 }}>{r.revision.version}</div>
-            <div style={{ fontSize: 12, color: "#6b7280" }}>
-              {r.revision.date}
+        {revs.map((r) => {
+          const selected = isSameOverlay(r);
+
+          return (
+            <div
+              key={`${r.space}__${r.discipline}__${r.region ?? ""}__${
+                r.revision.version
+              }`}
+              style={{
+                border: "1px solid #e5e7eb",
+                padding: 8,
+                background: "white",
+              }}
+            >
+              <div style={{ fontWeight: 600 }}>{r.revision.version}</div>
+              <div style={{ fontSize: 12, color: "#6b7280" }}>
+                {r.revision.date}
+              </div>
+              <div style={{ fontSize: 12, marginTop: 6 }}>
+                {r.revision.description}
+              </div>
+
+              <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+                <button
+                  onClick={() => {
+                    setRevision(r);
+                    setOverlay(null);
+                  }}
+                  style={{ padding: "6px 8px" }}
+                >
+                  Base로 보기
+                </button>
+
+                <button
+                  onClick={() => (selected ? setOverlay(null) : setOverlay(r))}
+                  style={{
+                    padding: "6px 8px",
+                  }}
+                >
+                  {selected ? "Overlay 해제" : "Overlay로 보기"}
+                </button>
+              </div>
             </div>
-            <div style={{ fontSize: 12, marginTop: 6 }}>
-              {r.revision.description}
-            </div>
-            <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
-              <button
-                onClick={() => setRevision(r)}
-                style={{ padding: "6px 8px" }}
-              >
-                Base로 보기
-              </button>
-              <button
-                onClick={() => setOverlay(r)}
-                style={{ padding: "6px 8px" }}
-              >
-                Overlay로
-              </button>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div style={{ height: 16 }} />

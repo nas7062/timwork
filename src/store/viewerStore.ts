@@ -41,7 +41,7 @@ export const useViewerStore = create<ViewerState>((set) => ({
 
   revision: null,
   overlay: null,
-  overlayOpacity: 60,
+  overlayOpacity: 70,
 
   mode: "VIEW",
 

@@ -1,54 +1,114 @@
+import { useEffect, useMemo, useState } from "react";
 import { useViewerStore } from "../store/viewerStore";
-
-function imgUrl(file: string) {
-  if (!file) return "";
-  return `/data/drawings/${file}`;
-}
 
 export default function Viewer() {
   const revision = useViewerStore((s) => s.revision);
   const overlay = useViewerStore((s) => s.overlay);
   const overlayOpacity = useViewerStore((s) => s.overlayOpacity);
 
-  const baseSrc = imgUrl(revision?.revision.image ?? "");
-  const overlaySrc = imgUrl(overlay?.revision.image ?? "");
+  const baseSrc = revision ? `/data/drawings/${revision.revision.image}` : "";
+  const overlaySrc = overlay ? `/data/drawings/${overlay.revision.image}` : "";
+
+  const [baseSize, setBaseSize] = useState<{ w: number; h: number } | null>(
+    null
+  );
+
+  // base 이미지 원본 크기 측정
+  useEffect(() => {
+    if (!revision) return;
+    const img = new Image();
+    img.src = baseSrc;
+    img.onload = () => {
+      setBaseSize({ w: img.naturalWidth, h: img.naturalHeight });
+    };
+  }, [revision?.revision.image, baseSrc, revision]);
+
+  // relativeTo 검증 (겹치기 허용 여부)
+  const canOverlay = useMemo(() => {
+    if (!revision || !overlay) return false;
+    const rel = overlay.revision.imageTransform?.relativeTo;
+    const baseImage = revision.baseImage || revision.revision.image;
+    // rel이 존재하면 반드시 baseImage와 같아야 함
+    return rel ? rel === baseImage : true;
+  }, [revision, overlay]);
+
+  const overlayStyle = useMemo(() => {
+    if (!overlay || !canOverlay) return undefined;
+
+    const t = overlay.revision.imageTransform;
+    if (!t) {
+      return {
+        position: "absolute" as const,
+        top: 0,
+        left: 0,
+        opacity: overlayOpacity / 100,
+        pointerEvents: "none" as const,
+      };
+    }
+
+    return {
+      position: "absolute" as const,
+      top: 0,
+      left: 0,
+      opacity: overlayOpacity / 100,
+      pointerEvents: "none" as const,
+      transformOrigin: "0 0",
+      zIndex: 50,
+    };
+  }, [overlay, overlayOpacity, canOverlay]);
+
+  if (!revision) return <div style={{ padding: 16 }}>도면을 선택하세요.</div>;
+  if (!baseSize) return <div style={{ padding: 16 }}>이미지 로딩 중…</div>;
 
   return (
     <div
-      style={{ position: "relative", overflow: "auto", background: "#111827" }}
+      style={{
+        width: "100%",
+        height: "100%",
+        overflow: "auto",
+        background: "#0b1220",
+      }}
     >
-      {!baseSrc ? (
-        <div style={{ color: "white", padding: 16 }}>
-          좌측에서 도면을 선택하세요.
-        </div>
-      ) : (
-        <div
+      {/* stage: 원본 픽셀 좌표계 */}
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          margin: "0 auto",
+          background: "#111827",
+        }}
+      >
+        {/* base는 원본 크기 그대로 */}
+        <img
+          src={baseSrc}
+          alt="base"
           style={{
-            position: "relative",
-            width: "fit-content",
-            margin: "16px auto",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
           }}
-        >
+        />
+
+        {/* overlay도 원본 크기 그대로 + 변환 */}
+        {overlay && canOverlay && (
           <img
-            src={baseSrc}
-            alt="base"
-            style={{ display: "block", maxWidth: "100%", height: "auto" }}
+            src={overlaySrc}
+            alt="overlay"
+            style={{
+              position: "absolute",
+              zIndex: 50,
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              ...overlayStyle,
+            }}
           />
-          {overlaySrc && (
-            <img
-              src={overlaySrc}
-              alt="overlay"
-              style={{
-                position: "absolute",
-                left: 0,
-                top: 0,
-                opacity: overlayOpacity / 100,
-                pointerEvents: "none",
-              }}
-            />
-          )}
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
