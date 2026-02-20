@@ -1,5 +1,11 @@
 import { create } from "zustand";
-import type { DisciplineKey, Index, RegionKey, RevRef, SpaceKey } from "../types/types";
+import type {
+  DisciplineKey,
+  Index,
+  RegionKey,
+  RevRef,
+  SpaceKey,
+} from "../types/types";
 
 type Mode = "VIEW" | "COMPARE";
 
@@ -10,8 +16,8 @@ interface ViewerState {
   discipline: DisciplineKey | null;
   region: RegionKey | null;
 
-  revision: RevRef | null; 
-  overlay: RevRef | null; 
+  revision: RevRef | null;
+  overlay: RevRef | null;
   overlayOpacity: number;
 
   mode: Mode;

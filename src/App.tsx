@@ -1,11 +1,8 @@
 import "./App.css";
+import ViewerPage from "./pages/ViewerPage";
 
 function App() {
-  return (
-    <>
-      <div className="p-6 bg-black text-white">Tailwind v4 OK</div>
-    </>
-  );
+  return <ViewerPage />;
 }
 
 export default App;
