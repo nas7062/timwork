@@ -38,11 +38,11 @@ export default function ViewerPage() {
   if (loading) return <div style={{ padding: 16 }}>Loading...</div>;
   if (err) return <div style={{ padding: 16 }}>Error: {err}</div>;
   if (!ready) return <div style={{ padding: 16 }}>No data</div>;
-
+  /*#e5e6e7 */
   return (
-    <div className="grid h-screen grid-cols-[280px_1fr_300px] bg-[#F3F4F6]">
+    <div className="grid h-screen grid-cols-[280px_1fr_300px] bg-white">
       <Sidebar />
-      <div className="grid grid-rows-[50px_1fr]">
+      <div className="grid grid-rows-[50px_1fr] ">
         <Topbar />
         <Viewer />
       </div>

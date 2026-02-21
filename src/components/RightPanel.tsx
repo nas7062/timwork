@@ -53,13 +53,15 @@ export default function RightPanel() {
   const current = target === "BASE" ? revision : oRevision;
 
   return (
-    <div className="border-l border-l-gray-200 p-3 overflow-auto h-screen flex flex-col gap-3">
+    <div className="border-l bg-gray-100 border-l-gray-300 p-3 overflow-auto h-screen flex flex-col gap-3 bg-gray=50">
       <div className="font-semibold flex items-center justify-between">
         <span>{target === "BASE" ? "Base 리비전" : "Overlay 리비전"}</span>
         <span
           className={clsx(
             "text-xs font-semibold px-2 py-0.5 rounded",
-            target === "BASE" ? "bg-gray-100 text-red-500" : "text-[#5d8bee]"
+            target === "BASE"
+              ? "bg-gray-100 text-gray-700"
+              : " bg-gray-100 text-[#5d8bee]"
           )}
         >
           {target}
@@ -95,8 +97,10 @@ export default function RightPanel() {
 
           return (
             <div
-              key={`${target}__${r.space}__${r.discipline}__${r.region ?? ""}__${r.revision.version}`}
-              className="border border-gray-200 p-2 bg-white rounded-lg flex flex-col gap-1"
+              key={`${target}__${r.space}__${r.discipline}__${
+                r.region ?? ""
+              }__${r.revision.version}`}
+              className="border border-gray-200 p-2 bg-white rounded-lg flex flex-col gap-1 shadow"
             >
               <div className="font-semibold flex justify-between">
                 <p>개정 버전 : {r.revision.version}</p>
@@ -104,7 +108,7 @@ export default function RightPanel() {
                   <span
                     className={clsx(
                       "text-xs font-semibold",
-                      target === "BASE" ? "text-red-500" : "text-blue-600"
+                      target === "BASE" ? "text-gray-700" : "text-blue-600"
                     )}
                   >
                     {target}
@@ -126,10 +130,10 @@ export default function RightPanel() {
                   sameAsBase
                     ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                     : selected
-                      ? "bg-gray-700 text-white "
-                      : target === "BASE"
-                        ? "bg-red-500 text-white hover:bg-red-600"
-                        : "bg-[#5d8bee] text-white hover:bg-blue-500"
+                    ? "bg-gray-700 text-white "
+                    : target === "BASE"
+                    ? "bg-gray-500 text-white hover:bg-gray-600"
+                    : "bg-[#5d8bee] text-white hover:bg-blue-500"
                 )}
                 onClick={() => {
                   if (sameAsBase) return;
@@ -147,8 +151,8 @@ export default function RightPanel() {
                     ? "현재 Base"
                     : "Base로 보기"
                   : selected
-                    ? "Overlay 해제"
-                    : "Overlay로 보기"}
+                  ? "Overlay 해제"
+                  : "Overlay로 보기"}
               </button>
             </div>
           );
@@ -165,7 +169,7 @@ export default function RightPanel() {
           </div>
           <input
             type="range"
-            className="w-full"
+            className="w-full accent-[#5d8bee] "
             min={0}
             max={100}
             value={overlayOpacity}

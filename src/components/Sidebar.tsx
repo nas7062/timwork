@@ -50,7 +50,7 @@ export default function Sidebar() {
     target === "BASE" ? setRegion(v) : setORegion(v);
 
   return (
-    <div className="flex flex-col gap-3 bg-[#eff0f0] border border-gray-200 p-3 overflow-auto">
+    <div className="flex flex-col gap-3 bg-gray-100 border border-gray-300 p-3 overflow-auto">
       <h1 className="text-4xl font-bold">
         <Link to="/" onClick={() => window.location.reload()}>
           TIMWORK

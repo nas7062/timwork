@@ -21,8 +21,7 @@ export default function Topbar() {
     <div className="flex items-center py-3  px-2 shadow rounded-md border-b border-b-gray-300">
       <div className="font-semibold ">{path}</div>
       <div className="ml-auto text-sm font-semibold ">
-        <p className="text-red-500">
-          {" "}
+        <p className="text-gray-800">
           Base: {revision?.revision.image.split(".")[0] ?? "-"}
         </p>
         <p className="text-[#2563EB]">

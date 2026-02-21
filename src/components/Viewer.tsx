@@ -71,46 +71,29 @@ export default function Viewer() {
     );
 
   return (
-    <div className="w-full h-screen overflow-auto bg-[#FFFFFF] shadow-2xl rounded-2xl">
+    <div className="w-full h-screen overflow-y-hidden ">
       {/* stage: 원본 픽셀 좌표계 */}
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "100%",
-          margin: "0 auto",
-          background: "#111827",
-        }}
-      >
-        {/* base는 원본 크기 그대로 */}
-        <img
-          src={baseSrc}
-          alt="base"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-          }}
-        />
-
-        {/* overlay도 원본 크기 그대로 + 변환 */}
-        {overlay && canOverlay && (
+      <div className="relative w-full h-screen  p-4 bg-gray-200 flex justify-center items-center">
+        <div className="rounded-2xl overflow-auto relative w-full h-full shadow ">
+          {/* base는 원본 크기 그대로 */}
           <img
-            src={overlaySrc}
-            alt="overlay"
-            style={{
-              position: "absolute",
-              zIndex: 50,
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              ...overlayStyle,
-            }}
+            src={baseSrc}
+            alt="base"
+            className="rounded-2xl shadow-2xl absolute top-0 left-0 w-full h-full  "
           />
-        )}
+
+          {/* overlay도 원본 크기 그대로 + 변환 */}
+          {overlay && canOverlay && (
+            <img
+              src={overlaySrc}
+              alt="overlay"
+              className="absolute z-50 top-0 left-0 w-full h-full "
+              style={{
+                ...overlayStyle,
+              }}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
