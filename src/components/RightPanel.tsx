@@ -77,10 +77,10 @@ export default function RightPanel() {
 
                 <button
                   className={clsx(
-                    "mt-2 w-full rounded-md px-2 py-1.5 transition-colors",
+                    "mt-2 w-full rounded-md px-2 py-1.5 transition-colors cursor-pointer",
                     selectedBase
                       ? "bg-gray-200 text-gray-600 cursor-default"
-                      : "bg-red-400 text-white hover:bg-red-500"
+                      : "bg-red-500 text-white hover:bg-red-600"
                   )}
                   onClick={() => {
                     if (selectedBase) return;
@@ -135,7 +135,7 @@ export default function RightPanel() {
                 <button
                   disabled={!!sameAsBase}
                   className={clsx(
-                    "mt-2 w-full rounded-md px-2 py-1.5 transition-colors",
+                    "mt-2 w-full rounded-md px-2 py-1.5 transition-colors cursor-pointer",
                     sameAsBase
                       ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                       : selectedOv

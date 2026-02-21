@@ -5,7 +5,7 @@ export default function Topbar() {
   const discipline = useViewerStore((s) => s.discipline);
   const region = useViewerStore((s) => s.region);
   const revision = useViewerStore((s) => s.revision);
-  const overlay = useViewerStore((s) => s.overlay);
+  const overlay = useViewerStore((s) => s.oRevision);
 
   const path = [
     "전체",
@@ -20,9 +20,12 @@ export default function Topbar() {
   return (
     <div className="flex items-center py-3  px-2 shadow rounded-md border-b border-b-gray-300">
       <div className="font-semibold ">{path}</div>
-      <div className="ml-auto text-sm font-semibold text-[#2563EB]">
-        <p> Base: {revision?.revision.image.split(".")[0] ?? "-"}</p>
-        <p>
+      <div className="ml-auto text-sm font-semibold ">
+        <p className="text-red-500">
+          {" "}
+          Base: {revision?.revision.image.split(".")[0] ?? "-"}
+        </p>
+        <p className="text-[#2563EB]">
           Overlay:
           {overlay?.revision.image.split(".")[0] ?? "-"}
         </p>

@@ -57,7 +57,7 @@ export default function Sidebar() {
           onClick={() => setTarget("BASE")}
           className={clsx(
             "p-2 rounded-md  transition-colors cursor-pointer",
-            target === "BASE" ? "bg-red-500 text-white" : "bg-white"
+            target === "BASE" ? "bg-gray-600 text-white" : "bg-white"
           )}
         >
           Base 선택
@@ -81,7 +81,13 @@ export default function Sidebar() {
             onClick={() => pickSpace(s)}
             className={clsx(
               "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer hover:border-blue-500",
-              s === activeSpace ? "bg-[#5d8bee] text-white" : "bg-white"
+              s === activeSpace &&
+                target === "BASE" &&
+                "bg-gray-600 text-white",
+              s === activeSpace &&
+                target === "OVERLAY" &&
+                "bg-[#5d8bee] text-white",
+              !(s === activeSpace) && "bg-white"
             )}
           >
             {s}
@@ -97,7 +103,13 @@ export default function Sidebar() {
             onClick={() => pickDiscipline(d)}
             className={clsx(
               "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer hover:border-blue-500",
-              d === activeDiscipline ? "bg-[#5d8bee] text-white" : "bg-white"
+              d === activeDiscipline &&
+                target === "BASE" &&
+                "bg-gray-600 text-white",
+              d === activeDiscipline &&
+                target === "OVERLAY" &&
+                "bg-[#5d8bee] text-white",
+              !(d === activeDiscipline) && "bg-white"
             )}
           >
             {d}
@@ -115,7 +127,13 @@ export default function Sidebar() {
                 onClick={() => pickRegion(r)}
                 className={clsx(
                   "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer hover:border-blue-500",
-                  r === activeRegion ? "bg-[#5d8bee] text-white" : "bg-white"
+                  r === activeRegion &&
+                    target === "BASE" &&
+                    "bg-gray-600 text-white",
+                  r === activeRegion &&
+                    target === "OVERLAY" &&
+                    "bg-[#5d8bee] text-white",
+                  !(r === activeRegion) && "bg-white"
                 )}
               >
                 {r}
