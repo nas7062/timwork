@@ -1,73 +1,39 @@
-# React + TypeScript + Vite
+# 프로젝트명
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TIMWORK
 
-Currently, two official plugins are available:
+## 실행 방법
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+npm install
+npm run dev
 
-## React Compiler
+## 기술 스택
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Core
 
-## Expanding the ESLint configuration
+React 19
+TypeScript 5
+Vite 7
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Routing & State
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+React Router v7
+Zustand
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Styling
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Tailwind CSS v4
+clsx
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 구현 기능
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| 기능          | 설명                                                                                         |
+| ------------- | -------------------------------------------------------------------------------------------- |
+| 도면 탐색     | 공간, 공종, 영역, 리비전을 선택해 사용자가 원하는 도면을 찾을 수 있음                        |
+| 도면 표시     | 선택한 도면 이미지를 화면에 표시                                                             |
+| 컨텍스트 인식 | TopBar를 통해 현재 어떤 도면을 보고 있는지 사용자가 알 수 있도록 하였음                      |
+| 오버레이      | 오버레이를 통해 공종, 리비전간에 도면을 겹쳐서 충돌하는지 혹은 무엇이 바뀐지 확인할 수 있음. |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 미완성 기능
+
+- [ ] 미완성 기능
