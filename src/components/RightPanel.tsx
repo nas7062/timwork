@@ -5,15 +5,16 @@ import type { RevRef } from "../types/types";
 
 export default function RightPanel() {
   const index = useViewerStore((s) => s.index);
+  const target = useViewerStore((s) => s.target);
 
-  // BASE 선택축
+  // BASE
   const space = useViewerStore((s) => s.space);
   const discipline = useViewerStore((s) => s.discipline);
   const region = useViewerStore((s) => s.region);
   const revision = useViewerStore((s) => s.revision);
   const setRevision = useViewerStore((s) => s.setRevision);
 
-  // OVERLAY 선택축
+  // OVERLAY
   const oSpace = useViewerStore((s) => s.oSpace);
   const oDiscipline = useViewerStore((s) => s.oDiscipline);
   const oRegion = useViewerStore((s) => s.oRegion);
@@ -47,127 +48,133 @@ export default function RightPanel() {
     );
   };
 
-  return (
-    <div className="border-l border-l-gray-200 p-3 overflow-auto h-screen flex flex-col gap-4">
-      {/* BASE 섹션 */}
-      <div className="flex flex-col gap-2">
-        <div className="font-semibold">Base 리비전</div>
-        <div className="flex flex-col gap-2">
-          {baseRevs.map((r) => {
-            const selectedBase = isSelected(revision, r);
-            return (
-              <div
-                key={`base__${r.space}__${r.discipline}__${r.region ?? ""}__${r.revision.version}`}
-                className="border border-gray-200 p-2 bg-white rounded-lg flex flex-col gap-1"
-              >
-                <div className="font-semibold flex justify-between">
-                  <p>개정 버전 : {r.revision.version}</p>
-                  {selectedBase ? (
-                    <span className="text-xs text-red-500 font-semibold">
-                      BASE
-                    </span>
-                  ) : null}
-                </div>
-                <div className="text-xs text-gray-500">
-                  개정 날짜 : {r.revision.date}
-                </div>
-                <div className="text-xs text-gray-700">
-                  개정 설명 : {r.revision.description}
-                </div>
+  // 화면에 뿌릴 목록/상태를 target에 따라 선택
+  const list = target === "BASE" ? baseRevs : overlayRevs;
+  const current = target === "BASE" ? revision : oRevision;
 
-                <button
-                  className={clsx(
-                    "mt-2 w-full rounded-md px-2 py-1.5 transition-colors cursor-pointer",
-                    selectedBase
-                      ? "bg-gray-200 text-gray-600 cursor-default"
-                      : "bg-red-500 text-white hover:bg-red-600"
-                  )}
-                  onClick={() => {
-                    if (selectedBase) return;
-                    setRevision(r);
-                  }}
-                >
-                  {selectedBase ? "현재 Base" : "Base로 보기"}
-                </button>
-              </div>
-            );
-          })}
-        </div>
+  return (
+    <div className="border-l border-l-gray-200 p-3 overflow-auto h-screen flex flex-col gap-3">
+      <div className="font-semibold flex items-center justify-between">
+        <span>{target === "BASE" ? "Base 리비전" : "Overlay 리비전"}</span>
+        <span
+          className={clsx(
+            "text-xs font-semibold px-2 py-0.5 rounded",
+            target === "BASE"
+              ? "bg-gray-100 text-gray-700"
+              : "bg-blue-50 text-blue-700"
+          )}
+        >
+          {target}
+        </span>
       </div>
 
-      {/* OVERLAY 섹션 */}
+      {/* 선택 축이 비어있을 때 안내 */}
+      {target === "BASE" && (!space || !discipline) && (
+        <div className="text-lg text-gray-700 flex justify-center items-center h-screen">
+          좌측에서 Base 공간/공종 <br />
+          혹은 영역을 선택하세요.
+        </div>
+      )}
+      {target === "OVERLAY" && (!oSpace || !oDiscipline) && (
+        <div className="text-lg text-gray-700 flex justify-center items-center h-screen">
+          좌측에서 Overlay 공간/공종 <br />
+          혹은 영역을 선택하세요.
+        </div>
+      )}
+
       <div className="flex flex-col gap-2">
-        <div className="font-semibold">Overlay 리비전</div>
+        {list.map((r) => {
+          const selected = isSelected(current, r);
 
-        <div className="flex flex-col gap-2">
-          {overlayRevs.map((r) => {
-            const selectedOv = isSelected(oRevision, r);
+          // Overlay 탭일 때: base와 완전히 같은 리비전은 의미 없으니 막음
+          const sameAsBase =
+            target === "OVERLAY" &&
+            revision &&
+            revision.space === r.space &&
+            revision.discipline === r.discipline &&
+            (revision.region ?? "") === (r.region ?? "") &&
+            revision.revision.version === r.revision.version;
 
-            // Base와 “완전히 같은 리비전”을 Overlay로 막는 것(동일 축일 때 의미 있음)
-            const sameAsBase =
-              revision &&
-              revision.space === r.space &&
-              revision.discipline === r.discipline &&
-              (revision.region ?? "") === (r.region ?? "") &&
-              revision.revision.version === r.revision.version;
+          return (
+            <div
+              key={`${target}__${r.space}__${r.discipline}__${r.region ?? ""}__${r.revision.version}`}
+              className="border border-gray-200 p-2 bg-white rounded-lg flex flex-col gap-1"
+            >
+              <div className="font-semibold flex justify-between">
+                <p>개정 버전 : {r.revision.version}</p>
+                {selected ? (
+                  <span
+                    className={clsx(
+                      "text-xs font-semibold",
+                      target === "BASE" ? "text-gray-900" : "text-blue-600"
+                    )}
+                  >
+                    {target}
+                  </span>
+                ) : null}
+              </div>
 
-            return (
-              <div
-                key={`ov__${r.space}__${r.discipline}__${r.region ?? ""}__${r.revision.version}`}
-                className="border border-gray-200 p-2 bg-white rounded-lg flex flex-col gap-1"
-              >
-                <div className="font-semibold flex justify-between">
-                  <p>개정 버전 : {r.revision.version}</p>
-                  {selectedOv ? (
-                    <span className="text-xs text-blue-600 font-semibold">
-                      OVERLAY
-                    </span>
-                  ) : null}
-                </div>
+              <div className="text-xs text-gray-500">
+                개정 날짜 : {r.revision.date}
+              </div>
+              <div className="text-xs text-gray-700">
+                개정 설명 : {r.revision.description}
+              </div>
 
-                <div className="text-xs text-gray-500">
-                  개정 날짜 : {r.revision.date}
-                </div>
-                <div className="text-xs text-gray-700">
-                  개정 설명 : {r.revision.description}
-                </div>
-
-                <button
-                  disabled={!!sameAsBase}
-                  className={clsx(
-                    "mt-2 w-full rounded-md px-2 py-1.5 transition-colors cursor-pointer",
-                    sameAsBase
-                      ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                      : selectedOv
+              <button
+                disabled={!!sameAsBase}
+                className={clsx(
+                  "mt-2 w-full rounded-md px-2 py-1.5 transition-colors",
+                  sameAsBase
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : selected
+                      ? "bg-gray-200 text-gray-600"
+                      : target === "BASE"
                         ? "bg-gray-900 text-white hover:bg-black"
                         : "bg-[#2563EB] text-white hover:bg-blue-700"
-                  )}
-                  onClick={() => {
-                    if (sameAsBase) return;
-                    setORevision(selectedOv ? null : r);
-                  }}
-                >
-                  {selectedOv ? "Overlay 해제" : "Overlay로 보기"}
-                </button>
-              </div>
-            );
-          })}
-        </div>
+                )}
+                onClick={() => {
+                  if (sameAsBase) return;
 
-        <div className="font-semibold mt-2">Overlay 투명도</div>
-        <div className="flex justify-between text-xs text-gray-500">
-          <p>투명</p>
-          <p>불투명</p>
-        </div>
-        <input
-          type="range"
-          className="w-full"
-          min={0}
-          max={100}
-          value={overlayOpacity}
-          onChange={(e) => setOverlayOpacity(Number(e.target.value))}
-        />
+                  if (target === "BASE") {
+                    if (selected) return;
+                    setRevision(r);
+                  } else {
+                    setORevision(selected ? null : r);
+                  }
+                }}
+              >
+                {target === "BASE"
+                  ? selected
+                    ? "현재 Base"
+                    : "Base로 보기"
+                  : selected
+                    ? "Overlay 해제"
+                    : "Overlay로 보기"}
+              </button>
+            </div>
+          );
+        })}
       </div>
+
+      {/* Overlay 탭일 때만 노출 */}
+      {target === "OVERLAY" && !(!oSpace || !oDiscipline) && (
+        <>
+          <div className="font-semibold mt-2">Overlay 투명도</div>
+          <div className="flex justify-between text-xs text-gray-500">
+            <p>투명</p>
+            <p>불투명</p>
+          </div>
+          <input
+            type="range"
+            className="w-full"
+            min={0}
+            max={100}
+            value={overlayOpacity}
+            onChange={(e) => setOverlayOpacity(Number(e.target.value))}
+          />
+        </>
+      )}
     </div>
   );
 }
