@@ -2,11 +2,10 @@ import { useMemo } from "react";
 import { useViewerStore } from "../store/viewerStore";
 import clsx from "clsx";
 import type { DisciplineKey, RegionKey, SpaceKey } from "../types/types";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const index = useViewerStore((s) => s.index);
-  const navigate = useNavigate();
 
   const target = useViewerStore((s) => s.target);
   const setTarget = useViewerStore((s) => s.setTarget);

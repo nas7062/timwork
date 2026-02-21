@@ -59,9 +59,7 @@ export default function RightPanel() {
         <span
           className={clsx(
             "text-xs font-semibold px-2 py-0.5 rounded",
-            target === "BASE"
-              ? "bg-gray-100 text-gray-700"
-              : "bg-blue-50 bg-[#5d8bee]"
+            target === "BASE" ? "bg-gray-100 text-red-500" : "text-[#5d8bee]"
           )}
         >
           {target}
@@ -106,7 +104,7 @@ export default function RightPanel() {
                   <span
                     className={clsx(
                       "text-xs font-semibold",
-                      target === "BASE" ? "text-gray-900" : "text-blue-600"
+                      target === "BASE" ? "text-red-500" : "text-blue-600"
                     )}
                   >
                     {target}
@@ -128,9 +126,9 @@ export default function RightPanel() {
                   sameAsBase
                     ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                     : selected
-                      ? "bg-gray-700 text-white hover:bg-gray-800"
+                      ? "bg-gray-700 text-white "
                       : target === "BASE"
-                        ? "bg-gray-900 text-white hover:bg-black"
+                        ? "bg-red-500 text-white hover:bg-red-600"
                         : "bg-[#5d8bee] text-white hover:bg-blue-500"
                 )}
                 onClick={() => {
