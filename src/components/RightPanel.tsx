@@ -61,7 +61,7 @@ export default function RightPanel() {
             "text-xs font-semibold px-2 py-0.5 rounded",
             target === "BASE"
               ? "bg-gray-100 text-gray-700"
-              : " bg-gray-100 text-[#5d8bee]"
+              : " bg-gray-100 text-blue-600"
           )}
         >
           {target}
@@ -149,10 +149,10 @@ export default function RightPanel() {
                 {target === "BASE"
                   ? selected
                     ? "현재 Base"
-                    : "Base로 보기"
+                    : "Base 선택"
                   : selected
                   ? "Overlay 해제"
-                  : "Overlay로 보기"}
+                  : "Overlay 선택"}
               </button>
             </div>
           );
