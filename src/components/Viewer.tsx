@@ -3,7 +3,7 @@ import { useViewerStore } from "../store/viewerStore";
 
 export default function Viewer() {
   const revision = useViewerStore((s) => s.revision);
-  const overlay = useViewerStore((s) => s.overlay);
+  const overlay = useViewerStore((s) => s.oRevision);
   const overlayOpacity = useViewerStore((s) => s.overlayOpacity);
 
   const baseSrc = revision ? `/data/drawings/${revision.revision.image}` : "";
