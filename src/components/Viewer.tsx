@@ -74,7 +74,7 @@ export default function Viewer() {
     <div className="w-full h-screen overflow-y-hidden ">
       {/* stage: 원본 픽셀 좌표계 */}
       <div className="relative w-full h-screen  p-4 bg-gray-200 flex justify-center items-center">
-        <div className="rounded-2xl overflow-auto relative w-full h-full shadow ">
+        <div className="rounded-2xl overflow-auto relative w-full h-full shadow-2xl ">
           {/* base는 원본 크기 그대로 */}
           <img
             src={baseSrc}

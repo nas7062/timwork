@@ -35,9 +35,12 @@ export default function ViewerPage() {
     [loading, err, index]
   );
 
-  if (loading) return <div style={{ padding: 16 }}>Loading...</div>;
-  if (err) return <div style={{ padding: 16 }}>Error: {err}</div>;
-  if (!ready) return <div style={{ padding: 16 }}>No data</div>;
+  if (loading)
+    return <div className="flex justify-center items-center">Loading...</div>;
+  if (err)
+    return <div className="flex justify-center items-center">Error: {err}</div>;
+  if (!ready)
+    return <div className="flex justify-center items-center">No data</div>;
   /*#e5e6e7 */
   return (
     <div className="grid h-screen grid-cols-[280px_1fr_300px] bg-white">
