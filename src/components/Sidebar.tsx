@@ -2,9 +2,11 @@ import { useMemo } from "react";
 import { useViewerStore } from "../store/viewerStore";
 import clsx from "clsx";
 import type { DisciplineKey, RegionKey, SpaceKey } from "../types/types";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
   const index = useViewerStore((s) => s.index);
+  const navigate = useNavigate();
 
   const target = useViewerStore((s) => s.target);
   const setTarget = useViewerStore((s) => s.setTarget);
@@ -50,7 +52,11 @@ export default function Sidebar() {
 
   return (
     <div className="flex flex-col gap-3 bg-[#eff0f0] border border-gray-200 p-3 overflow-auto">
-      <h1 className="text-4xl font-bold">TIMWORK</h1>
+      <h1 className="text-4xl font-bold">
+        <Link to="/" onClick={() => window.location.reload()}>
+          TIMWORK
+        </Link>
+      </h1>
 
       <div className="grid grid-cols-2 gap-2">
         <button
@@ -66,7 +72,7 @@ export default function Sidebar() {
           onClick={() => setTarget("OVERLAY")}
           className={clsx(
             "p-2 rounded-md transition-colors cursor-pointer",
-            target === "OVERLAY" ? "bg-blue-500 text-white" : "bg-white"
+            target === "OVERLAY" ? "bg-[#5d8bee] text-white" : "bg-white"
           )}
         >
           Overlay 선택

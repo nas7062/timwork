@@ -61,7 +61,7 @@ export default function RightPanel() {
             "text-xs font-semibold px-2 py-0.5 rounded",
             target === "BASE"
               ? "bg-gray-100 text-gray-700"
-              : "bg-blue-50 text-blue-700"
+              : "bg-blue-50 bg-[#5d8bee]"
           )}
         >
           {target}
@@ -124,14 +124,14 @@ export default function RightPanel() {
               <button
                 disabled={!!sameAsBase}
                 className={clsx(
-                  "mt-2 w-full rounded-md px-2 py-1.5 transition-colors",
+                  "mt-2 w-full rounded-md px-2 py-1.5 transition-colors cursor-pointer",
                   sameAsBase
                     ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                     : selected
-                      ? "bg-gray-200 text-gray-600"
+                      ? "bg-gray-700 text-white hover:bg-gray-800"
                       : target === "BASE"
                         ? "bg-gray-900 text-white hover:bg-black"
-                        : "bg-[#2563EB] text-white hover:bg-blue-700"
+                        : "bg-[#5d8bee] text-white hover:bg-blue-500"
                 )}
                 onClick={() => {
                   if (sameAsBase) return;
