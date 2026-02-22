@@ -1,8 +1,11 @@
 import { useMemo } from "react";
 import { useViewerStore } from "../store/viewerStore";
-import clsx from "clsx";
 import type { DisciplineKey, RegionKey, SpaceKey } from "../types/types";
 import { Link } from "react-router-dom";
+import Tabs from "./Tabs";
+import SpaceList from "./SpaceList";
+import DisciplinesLIst from "./DisciplinesList";
+import RegionList from "./RegionList";
 
 export default function Sidebar() {
   const index = useViewerStore((s) => s.index);
@@ -26,22 +29,27 @@ export default function Sidebar() {
   const setODiscipline = useViewerStore((s) => s.setODiscipline);
   const setORegion = useViewerStore((s) => s.setORegion);
 
+  //공간
   const spaces = index?.spaces ?? [];
 
+  //active
   const activeSpace = target === "BASE" ? space : oSpace;
   const activeDiscipline = target === "BASE" ? discipline : oDiscipline;
   const activeRegion = target === "BASE" ? region : oRegion;
 
+  // 공종
   const disciplines = useMemo(() => {
     if (!index || !activeSpace) return [];
     return index.disciplinesBySpace[activeSpace] ?? [];
   }, [index, activeSpace]);
 
+  // 영역
   const regions = useMemo(() => {
     if (!index || !activeSpace || !activeDiscipline) return [];
     return index.regionsBySD[`${activeSpace}__${activeDiscipline}`] ?? [];
   }, [index, activeSpace, activeDiscipline]);
 
+  // base 선택인지 overlay 선택인지
   const pickSpace = (v: SpaceKey) =>
     target === "BASE" ? setSpace(v) : setOSpace(v);
   const pickDiscipline = (v: DisciplineKey) =>
@@ -56,95 +64,30 @@ export default function Sidebar() {
           TIMWORK
         </Link>
       </h1>
-
-      <div className="grid grid-cols-2 gap-2">
-        <button
-          onClick={() => setTarget("BASE")}
-          className={clsx(
-            "p-2 rounded-md  transition-colors cursor-pointer",
-            target === "BASE" ? "bg-gray-600 text-white" : "bg-white"
-          )}
-        >
-          Base 선택
-        </button>
-        <button
-          onClick={() => setTarget("OVERLAY")}
-          className={clsx(
-            "p-2 rounded-md transition-colors cursor-pointer",
-            target === "OVERLAY" ? "bg-[#5d8bee] text-white" : "bg-white"
-          )}
-        >
-          Overlay 선택
-        </button>
-      </div>
-
+      <Tabs target={target} setTarget={setTarget} />
       <h3 className="font-semibold">공간</h3>
-      <div className="flex flex-col gap-1">
-        {spaces.map((s) => (
-          <button
-            key={s}
-            onClick={() => pickSpace(s)}
-            className={clsx(
-              "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer hover:border-blue-500",
-              s === activeSpace &&
-                target === "BASE" &&
-                "bg-gray-600 text-white",
-              s === activeSpace &&
-                target === "OVERLAY" &&
-                "bg-[#5d8bee] text-white",
-              !(s === activeSpace) && "bg-white"
-            )}
-          >
-            {s}
-          </button>
-        ))}
-      </div>
-
+      <SpaceList
+        spaces={spaces}
+        target={target}
+        activeSpace={activeSpace}
+        pickSpace={pickSpace}
+      />
       <h3 className="font-semibold">공종</h3>
-      <div className="flex flex-col gap-1">
-        {disciplines.map((d) => (
-          <button
-            key={d}
-            onClick={() => pickDiscipline(d)}
-            className={clsx(
-              "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer hover:border-blue-500",
-              d === activeDiscipline &&
-                target === "BASE" &&
-                "bg-gray-600 text-white",
-              d === activeDiscipline &&
-                target === "OVERLAY" &&
-                "bg-[#5d8bee] text-white",
-              !(d === activeDiscipline) && "bg-white"
-            )}
-          >
-            {d}
-          </button>
-        ))}
-      </div>
-
+      <DisciplinesLIst
+        disciplines={disciplines}
+        target={target}
+        activeDiscipline={activeDiscipline}
+        pickDiscipline={pickDiscipline}
+      />
       {regions.length > 0 && (
         <>
           <div className="font-semibold">영역</div>
-          <div className="flex flex-col gap-1">
-            {regions.map((r) => (
-              <button
-                key={r}
-                onClick={() => pickRegion(r)}
-                className={clsx(
-                  "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer hover:border-blue-500",
-                  r === activeRegion &&
-                    target === "BASE" &&
-                    "bg-gray-600 text-white",
-                  r === activeRegion &&
-                    target === "OVERLAY" &&
-                    "bg-[#5d8bee] text-white",
-                  !(r === activeRegion) && "bg-white"
-                )}
-              >
-                {r}
-              </button>
-            ))}
-          </div>
+          <RegionList
+            regions={regions}
+            target={target}
+            pickRegion={pickRegion}
+            activeRegion={activeRegion}
+          />
         </>
       )}
     </div>

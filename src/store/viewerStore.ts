@@ -8,7 +8,7 @@ import type {
 } from "../types/types";
 
 type Mode = "VIEW" | "COMPARE";
-type Target = "BASE" | "OVERLAY";
+export type Target = "BASE" | "OVERLAY";
 
 interface ViewerState {
   index: Index | null;

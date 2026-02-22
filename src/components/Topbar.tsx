@@ -7,6 +7,7 @@ export default function Topbar() {
   const revision = useViewerStore((s) => s.revision);
   const overlay = useViewerStore((s) => s.oRevision);
 
+  //현재 컨텍스트(현재 공간/공종/리비전 표시)
   const path = [
     "전체",
     space ?? "-",
