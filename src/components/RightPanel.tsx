@@ -130,10 +130,10 @@ export default function RightPanel() {
                   sameAsBase
                     ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                     : selected
-                    ? "bg-gray-700 text-white "
-                    : target === "BASE"
-                    ? "bg-gray-500 text-white hover:bg-gray-600"
-                    : "bg-[#5d8bee] text-white hover:bg-blue-500"
+                      ? "bg-gray-700 text-white "
+                      : target === "BASE"
+                        ? "bg-gray-500 text-white hover:bg-gray-600"
+                        : "bg-[#5d8bee] text-white hover:bg-blue-500"
                 )}
                 onClick={() => {
                   if (sameAsBase) return;
@@ -151,8 +151,8 @@ export default function RightPanel() {
                     ? "현재 Base"
                     : "Base 선택"
                   : selected
-                  ? "Overlay 해제"
-                  : "Overlay 선택"}
+                    ? "Overlay 해제"
+                    : "Overlay 선택"}
               </button>
             </div>
           );
