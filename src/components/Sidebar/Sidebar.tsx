@@ -12,7 +12,7 @@ export default function Sidebar() {
 
   const target = useViewerStore((s) => s.target);
   const setTarget = useViewerStore((s) => s.setTarget);
-
+  
   // BASE
   const space = useViewerStore((s) => s.space);
   const discipline = useViewerStore((s) => s.discipline);
