@@ -22,7 +22,10 @@ export default function RegionList({
           key={r}
           onClick={() => pickRegion(r)}
           className={clsx(
-            "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer hover:border-blue-500",
+            "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer ",
+            target === "BASE"
+              ? "hover:border-gray-700"
+              : " hover:border-blue-500",
             r === activeRegion && target === "BASE" && "bg-gray-600 text-white",
             r === activeRegion &&
               target === "OVERLAY" &&

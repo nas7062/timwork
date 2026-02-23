@@ -22,7 +22,10 @@ export default function SpaceList({
           key={s}
           onClick={() => pickSpace(s)}
           className={clsx(
-            "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer hover:border-blue-500",
+            "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer",
+            target === "BASE"
+              ? "hover:border-gray-700"
+              : " hover:border-blue-500",
             s === activeSpace && target === "BASE" && "bg-gray-600 text-white",
             s === activeSpace &&
               target === "OVERLAY" &&
