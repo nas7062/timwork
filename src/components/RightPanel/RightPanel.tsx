@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { useViewerStore } from "../store/viewerStore";
-import type { RevRef } from "../types/types";
+import { useViewerStore } from "../../store/viewerStore";
+import type { RevRef } from "../../types/types";
 import TargetMessages from "./TargetMessages";
 import OverlayProgress from "./OverlayProgress";
 import RevisionCard from "./RevisionCard";

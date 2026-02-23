@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import type { Target } from "../store/viewerStore";
+import type { Target } from "../../store/viewerStore";
 
 interface Props {
   target: Target;

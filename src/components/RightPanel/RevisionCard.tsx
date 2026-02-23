@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import type { Target } from "../store/viewerStore";
-import type { RevRef } from "../types/types";
+import type { Target } from "../../store/viewerStore";
+import type { RevRef } from "../../types/types";
 
 interface Props {
   target: Target;

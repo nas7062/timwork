@@ -1,4 +1,3 @@
-import "./App.css";
 import ViewerPage from "./pages/ViewerPage";
 
 function App() {

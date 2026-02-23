@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import type { DisciplineKey } from "../types/types";
-import type { Target } from "../store/viewerStore";
+import type { DisciplineKey } from "../../types/types";
+import type { Target } from "../../store/viewerStore";
 
 interface Props {
   disciplines: string[];

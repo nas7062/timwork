@@ -19,7 +19,7 @@ interface ViewerState {
   region: RegionKey | null;
   revision: RevRef | null;
 
-  // OVERLAY 선택(추가)
+  // OVERLAY 선택
   oSpace: SpaceKey | null;
   oDiscipline: DisciplineKey | null;
   oRegion: RegionKey | null;
@@ -76,7 +76,6 @@ export const useViewerStore = create<ViewerState>((set) => ({
       discipline: null,
       region: null,
       revision: null,
-      // base 바꾸면 overlay 검증이 깨질 수 있어 overlay revision만 정리(선택 축은 유지)
       oRevision: null,
     }),
   setDiscipline: (discipline) =>
@@ -84,7 +83,6 @@ export const useViewerStore = create<ViewerState>((set) => ({
   setRegion: (region) => set({ region, revision: null, oRevision: null }),
   setRevision: (revision) => set({ revision }),
 
-  // OVERLAY setters
   setOSpace: (oSpace) =>
     set({
       oSpace,

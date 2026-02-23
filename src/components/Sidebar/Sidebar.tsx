@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { useViewerStore } from "../store/viewerStore";
-import type { DisciplineKey, RegionKey, SpaceKey } from "../types/types";
+import { useViewerStore } from "../../store/viewerStore";
+import type { DisciplineKey, RegionKey, SpaceKey } from "../../types/types";
 import { Link } from "react-router-dom";
 import Tabs from "./Tabs";
 import SpaceList from "./SpaceList";

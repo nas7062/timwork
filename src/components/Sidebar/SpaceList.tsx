@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import type { Target } from "../store/viewerStore";
-import type { SpaceKey } from "../types/types";
+import type { Target } from "../../store/viewerStore";
+import type { SpaceKey } from "../../types/types";
 
 interface Props {
   spaces: string[];
