@@ -1,14 +1,14 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 import type {
   DisciplineKey,
   Index,
   RegionKey,
   RevRef,
   SpaceKey,
-} from "../types/types";
+} from '../types/types';
 
-type Mode = "VIEW" | "COMPARE";
-export type Target = "BASE" | "OVERLAY";
+type Mode = 'VIEW' | 'COMPARE';
+export type Target = 'BASE' | 'OVERLAY';
 
 interface ViewerState {
   index: Index | null;
@@ -64,8 +64,8 @@ export const useViewerStore = create<ViewerState>((set) => ({
 
   overlayOpacity: 70,
 
-  mode: "VIEW",
-  target: "BASE",
+  mode: 'VIEW',
+  target: 'BASE',
 
   setIndex: (index) => set({ index }),
 

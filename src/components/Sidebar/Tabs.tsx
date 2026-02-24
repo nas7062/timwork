@@ -1,5 +1,5 @@
-import clsx from "clsx";
-import { useViewerStore, type Target } from "../../store/viewerStore";
+import clsx from 'clsx';
+import { useViewerStore, type Target } from '../../store/viewerStore';
 
 interface Props {
   target: Target;
@@ -10,10 +10,10 @@ export default function Tabs({ target, setTarget }: Props) {
   return (
     <div className="grid grid-cols-2 ">
       <button
-        onClick={() => setTarget("BASE")}
+        onClick={() => setTarget('BASE')}
         className={clsx(
-          "p-2 rounded-md  transition-colors cursor-pointer",
-          target === "BASE" ? "bg-gray-600 text-white" : "bg-white"
+          'p-2 rounded-md  transition-colors cursor-pointer',
+          target === 'BASE' ? 'bg-gray-600 text-white' : 'bg-white',
         )}
       >
         Base 선택
@@ -21,15 +21,15 @@ export default function Tabs({ target, setTarget }: Props) {
       <button
         onClick={() => {
           if (!revision?.revision.image) {
-            alert("Base 선택 후 Overlay 선택이 가능합니다.");
+            alert('Base 선택 후 Overlay 선택이 가능합니다.');
             return;
           }
 
-          setTarget("OVERLAY");
+          setTarget('OVERLAY');
         }}
         className={clsx(
-          "p-2 rounded-md transition-colors cursor-pointer",
-          target === "OVERLAY" ? "bg-[#5d8bee] text-white" : "bg-white"
+          'p-2 rounded-md transition-colors cursor-pointer',
+          target === 'OVERLAY' ? 'bg-[#5d8bee] text-white' : 'bg-white',
         )}
       >
         Overlay 선택

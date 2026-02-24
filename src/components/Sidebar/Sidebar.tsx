@@ -1,18 +1,18 @@
-import { useMemo } from "react";
-import { useViewerStore } from "../../store/viewerStore";
-import type { DisciplineKey, RegionKey, SpaceKey } from "../../types/types";
-import { Link } from "react-router-dom";
-import Tabs from "./Tabs";
-import SpaceList from "./SpaceList";
-import DisciplinesLIst from "./DisciplinesList";
-import RegionList from "./RegionList";
+import { useMemo } from 'react';
+import { useViewerStore } from '../../store/viewerStore';
+import type { DisciplineKey, RegionKey, SpaceKey } from '../../types/types';
+import { Link } from 'react-router-dom';
+import Tabs from './Tabs';
+import SpaceList from './SpaceList';
+import DisciplinesLIst from './DisciplinesList';
+import RegionList from './RegionList';
 
 export default function Sidebar() {
   const index = useViewerStore((s) => s.index);
 
   const target = useViewerStore((s) => s.target);
   const setTarget = useViewerStore((s) => s.setTarget);
-  
+
   // BASE
   const space = useViewerStore((s) => s.space);
   const discipline = useViewerStore((s) => s.discipline);
@@ -33,9 +33,9 @@ export default function Sidebar() {
   const spaces = index?.spaces ?? [];
 
   //active
-  const activeSpace = target === "BASE" ? space : oSpace;
-  const activeDiscipline = target === "BASE" ? discipline : oDiscipline;
-  const activeRegion = target === "BASE" ? region : oRegion;
+  const activeSpace = target === 'BASE' ? space : oSpace;
+  const activeDiscipline = target === 'BASE' ? discipline : oDiscipline;
+  const activeRegion = target === 'BASE' ? region : oRegion;
 
   // 공종
   const disciplines = useMemo(() => {
@@ -51,11 +51,11 @@ export default function Sidebar() {
 
   // base 선택인지 overlay 선택인지
   const pickSpace = (v: SpaceKey) =>
-    target === "BASE" ? setSpace(v) : setOSpace(v);
+    target === 'BASE' ? setSpace(v) : setOSpace(v);
   const pickDiscipline = (v: DisciplineKey) =>
-    target === "BASE" ? setDiscipline(v) : setODiscipline(v);
+    target === 'BASE' ? setDiscipline(v) : setODiscipline(v);
   const pickRegion = (v: RegionKey) =>
-    target === "BASE" ? setRegion(v) : setORegion(v);
+    target === 'BASE' ? setRegion(v) : setORegion(v);
 
   return (
     <div className="flex flex-col gap-3 bg-gray-100 border border-gray-300 p-3 overflow-auto">

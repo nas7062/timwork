@@ -1,6 +1,6 @@
-import clsx from "clsx";
-import type { Target } from "../../store/viewerStore";
-import type { SpaceKey } from "../../types/types";
+import clsx from 'clsx';
+import type { Target } from '../../store/viewerStore';
+import type { SpaceKey } from '../../types/types';
 
 interface Props {
   spaces: string[];
@@ -22,15 +22,15 @@ export default function SpaceList({
           key={s}
           onClick={() => pickSpace(s)}
           className={clsx(
-            "p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer",
-            target === "BASE"
-              ? "hover:border-gray-700"
-              : " hover:border-blue-500",
-            s === activeSpace && target === "BASE" && "bg-gray-600 text-white",
+            'p-2 border border-gray-300 transition-colors duration-300 rounded-md cursor-pointer',
+            target === 'BASE'
+              ? 'hover:border-gray-700'
+              : ' hover:border-blue-500',
+            s === activeSpace && target === 'BASE' && 'bg-gray-600 text-white',
             s === activeSpace &&
-              target === "OVERLAY" &&
-              "bg-[#5d8bee] text-white",
-            !(s === activeSpace) && "bg-white"
+              target === 'OVERLAY' &&
+              'bg-[#5d8bee] text-white',
+            !(s === activeSpace) && 'bg-white',
           )}
         >
           {s}

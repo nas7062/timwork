@@ -1,16 +1,16 @@
-import { useEffect, useMemo, useState } from "react";
-import { useViewerStore } from "../store/viewerStore";
+import { useEffect, useMemo, useState } from 'react';
+import { useViewerStore } from '../store/viewerStore';
 
 export default function Viewer() {
   const revision = useViewerStore((s) => s.revision);
   const overlay = useViewerStore((s) => s.oRevision);
   const overlayOpacity = useViewerStore((s) => s.overlayOpacity);
 
-  const baseSrc = revision ? `/data/drawings/${revision.revision.image}` : "";
-  const overlaySrc = overlay ? `/data/drawings/${overlay.revision.image}` : "";
+  const baseSrc = revision ? `/data/drawings/${revision.revision.image}` : '';
+  const overlaySrc = overlay ? `/data/drawings/${overlay.revision.image}` : '';
 
   const [baseSize, setBaseSize] = useState<{ w: number; h: number } | null>(
-    null
+    null,
   );
 
   // base 이미지 원본 크기 측정

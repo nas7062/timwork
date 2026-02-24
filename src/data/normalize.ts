@@ -1,10 +1,10 @@
-import type { DrawingDiscipline, Index, Metadata } from "../types/types";
+import type { DrawingDiscipline, Index, Metadata } from '../types/types';
 
 function keySD(space: string, disc: string) {
   return `${space}__${disc}`;
 }
 function keySDR(space: string, disc: string, region?: string) {
-  return `${space}__${disc}__${region ?? ""}`;
+  return `${space}__${disc}__${region ?? ''}`;
 }
 
 export function buildIndex(meta: Metadata): Index {
@@ -13,7 +13,7 @@ export function buildIndex(meta: Metadata): Index {
 
   // 전체 찾기
   const site = drawings.find(
-    (d) => d.name.includes("전체") || d.image.includes("00_전체")
+    (d) => d.name.includes('전체') || d.image.includes('00_전체'),
   );
   const siteId = site?.id;
 
@@ -22,14 +22,14 @@ export function buildIndex(meta: Metadata): Index {
     .filter(
       (d) =>
         d.parent != null &&
-        (siteId == null ? true : d.parent === String(siteId))
+        (siteId == null ? true : d.parent === String(siteId)),
     )
     .map((d) => d.name);
 
-  const disciplinesBySpace: Index["disciplinesBySpace"] = {};
-  const regionsBySD: Index["regionsBySD"] = {};
-  const revisionsBySDR: Index["revisionsBySDR"] = {};
-  const baseBySpace: Index["baseBySpace"] = {};
+  const disciplinesBySpace: Index['disciplinesBySpace'] = {};
+  const regionsBySD: Index['regionsBySD'] = {};
+  const revisionsBySDR: Index['revisionsBySDR'] = {};
+  const baseBySpace: Index['baseBySpace'] = {};
 
   for (const spaceName of spaces) {
     // 공간 도면 찾기
@@ -38,12 +38,12 @@ export function buildIndex(meta: Metadata): Index {
     const disciplines = Object.keys(spaceDrawing?.disciplines ?? {});
     disciplinesBySpace[spaceName] = disciplines;
     // 건축 도면 이미지가 있으면 그걸 기준(base)로 삼고 건축이 없으면 첫 공종의 image
-    const arch = (spaceDrawing?.disciplines ?? {})["건축"];
+    const arch = (spaceDrawing?.disciplines ?? {})['건축'];
     const fallback = disciplines.length
       ? (spaceDrawing?.disciplines ?? {})[disciplines[0]]
       : undefined;
     baseBySpace[spaceName] =
-      arch?.image ?? fallback?.image ?? spaceDrawing?.image ?? "";
+      arch?.image ?? fallback?.image ?? spaceDrawing?.image ?? '';
 
     for (const disc of disciplines) {
       //공종 데이터
@@ -67,7 +67,7 @@ export function buildIndex(meta: Metadata): Index {
               region,
               revision,
               baseImage: discData.image ?? baseBySpace[spaceName],
-            })
+            }),
           );
         }
       }

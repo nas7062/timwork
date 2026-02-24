@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
-import { buildIndex } from "../data/normalize";
-import { useViewerStore } from "../store/viewerStore";
-import { getMetadata } from "../api/getMetadata";
-import Sidebar from "../components/Sidebar/Sidebar";
-import Topbar from "../components/Topbar";
-import Viewer from "../components/Viewer";
-import RightPanel from "../components/RightPanel/RightPanel";
+import { useEffect, useMemo, useState } from 'react';
+import { buildIndex } from '../data/normalize';
+import { useViewerStore } from '../store/viewerStore';
+import { getMetadata } from '../api/getMetadata';
+import Sidebar from '../components/Sidebar/Sidebar';
+import Topbar from '../components/Topbar';
+import Viewer from '../components/Viewer';
+import RightPanel from '../components/RightPanel/RightPanel';
 
 export default function ViewerPage() {
   const setIndex = useViewerStore((s) => s.setIndex);
@@ -32,7 +32,7 @@ export default function ViewerPage() {
 
   const ready = useMemo(
     () => !loading && !err && !!index,
-    [loading, err, index]
+    [loading, err, index],
   );
 
   if (loading)

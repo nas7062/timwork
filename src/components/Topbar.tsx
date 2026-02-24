@@ -1,4 +1,4 @@
-import { useViewerStore } from "../store/viewerStore";
+import { useViewerStore } from '../store/viewerStore';
 
 export default function Topbar() {
   const space = useViewerStore((s) => s.space);
@@ -9,25 +9,25 @@ export default function Topbar() {
 
   //현재 컨텍스트(현재 공간/공종/리비전 표시)
   const path = [
-    "전체",
-    space ?? "-",
-    discipline ?? "-",
+    '전체',
+    space ?? '-',
+    discipline ?? '-',
     region ?? undefined,
-    revision?.revision.version ?? "-",
+    revision?.revision.version ?? '-',
   ]
     .filter(Boolean)
-    .join(" > ");
+    .join(' > ');
 
   return (
     <div className="flex items-center py-3  px-2 shadow rounded-md border-b border-b-gray-300">
       <div className="font-semibold ">{path}</div>
       <div className="ml-auto text-sm font-semibold ">
         <p className="text-gray-800">
-          Base: {revision?.revision.image.split(".")[0] ?? "-"}
+          Base: {revision?.revision.image.split('.')[0] ?? '-'}
         </p>
         <p className="text-[#2563EB]">
           Overlay:
-          {overlay?.revision.image.split(".")[0] ?? "-"}
+          {overlay?.revision.image.split('.')[0] ?? '-'}
         </p>
       </div>
       <div></div>
