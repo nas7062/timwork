@@ -13,20 +13,21 @@ npm run dev
 ## 기술 스택
 
 ### Core
-
+```
 React 19
 TypeScript 5
 Vite 7
-
+```
 ### Routing & State
-
+```
 React Router v7
 Zustand
-
+```
 ### Styling
-
+```
 Tailwind CSS v4
 clsx
+```
 
 ## 구현 기능
 
