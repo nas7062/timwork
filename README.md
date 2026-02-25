@@ -5,6 +5,7 @@ TIMWORK
 ## 실행 방법
 
 ```
+git clone https://github.com/nas7062/timwork.git .
 npm install
 npm run dev
 ```
